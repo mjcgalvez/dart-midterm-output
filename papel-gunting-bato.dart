@@ -1,10 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 
-/// Get a player move via keyboard input
-/// If the player does not enter a valid move
-/// return "Quit" so that the main game loop
-/// knows to end the game
 String getPlayerMove() {
   print("Papel, Gunting, Bato! What's your Pick?");
   String selection = stdin.readLineSync();
@@ -19,17 +15,15 @@ String getPlayerMove() {
     case "Papel":
       return "Papel";
       break;
-    default:  //if anything but R, P, or S
+    default:  
       return "Quit";
       break;
   }
 }
 
-/// Return a random move in the form of a string of either
-/// "Rock", "Paper", or "Scissors"
 String getComputerMove() {
   Random rand = new Random();
-  int move = rand.nextInt(3);  //random int from 0 to 2
+  int move = rand.nextInt(3);  
   
   switch (move) {
     case 0:
@@ -46,10 +40,8 @@ String getComputerMove() {
   }
 }
 
-/// Determine if the player or the computer won
-/// by comparing [playerMove] to [computerMove]
 String whoWon(String playerMove, String computerMove) {
-  if (playerMove == computerMove) {  //if the same, it's a tie
+  if (playerMove == computerMove) { 
     return "Tie";
   } else if (playerMove == "Bato" && computerMove == "Gunting") {
     return "You Win!";
@@ -57,17 +49,17 @@ String whoWon(String playerMove, String computerMove) {
     return "You Win!";
   } else if (playerMove == "Papel" && computerMove == "Bato") {
     return "You Win!";
-  } else {  //if it's not a tie and you didn't win, computer won
+  } else {  
     return "Computer Wins!";
   }
 }
 
 void main() {
-  while(true) {  //main game loop (qusi infinite loop)
+  while(true) {  
     String playerMove = getPlayerMove();
     
     if (playerMove == "Quit") {
-      return;  //returning from void function exits it
+      return;
     }
     
     print("You- $playerMove");
