@@ -2,22 +2,20 @@ import 'dart:io';
 import 'dart:math';
 
 String getPlayerMove() {
-  print("Papel, Gunting, Bato! What's your Pick?");
+  print("Papel, Gunting, Bato! What's your Pick? (Q for Quit)"); 
   String selection = stdin.readLineSync();
   
-  switch (selection) {
-    case "Bato":
+  if (selection == "BATO" || selection== "bato" || selection== "Bato"){
       return "Bato";
-      break;
-    case "Gunting":
-      return "Gunting";
-      break;
-    case "Papel":
+  }
+  else if(selection=="GUNTING" || selection == "gunting" || selection == "Gunting"){
+      return "Gunting :scissor:";
+  }
+  else if(selection=="PAPEL" || selection == "papel" || selection == "Papel"){
       return "Papel";
-      break;
-    default:  
+  }  
+  else{
       return "Quit";
-      break;
   }
 }
 
