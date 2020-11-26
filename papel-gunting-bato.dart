@@ -9,13 +9,14 @@ String getPlayerMove() {
       return "Bato";
   }
   else if(selection=="GUNTING" || selection == "gunting" || selection == "Gunting"){
-      return "Gunting :scissor:";
+      return "Gunting";
   }
   else if(selection=="PAPEL" || selection == "papel" || selection == "Papel"){
       return "Papel";
   }  
   else{
-      return "Quit";
+     print("Invalid input.");
+     exit(0);
   }
 }
 
@@ -23,47 +24,61 @@ String getComputerMove() {
   Random rand = new Random();
   int move = rand.nextInt(3);  
   
-  switch (move) {
-    case 0:
+  if(move==0){
       return "Bato";
-      break;
-    case 1:
+  }
+  else if(move==1){
       return "Papel";
-      break;
-    case 2:
+  }
+  else{
       return "Gunting";
-      break;
-    default:
-      break;
   }
 }
 
-String whoWon(String playerMove, String computerMove) {
-  if (playerMove == computerMove) { 
-    return "Tie";
-  } else if (playerMove == "Bato" && computerMove == "Gunting") {
-    return "You Win!";
-  } else if (playerMove == "Gunting" && computerMove == "Papel") {
-    return "You Win!";
-  } else if (playerMove == "Papel" && computerMove == "Bato") {
-    return "You Win!";
-  } else {  
-    return "Computer Wins!";
-  }
-}
 
 void main() {
-  while(true) {  
+    
+ int playerscore=0;
+ int compscore=0; 
+ print("PAPEL-GUNTING-BATO GAME.");
+ print("How many rounds do you want to play?");
+ int roundCount= int.parse(stdin.readLineSync());
+
+  for(int i=1; i<=roundCount; i++) {  
+    String round = i.toString(); 
+    
+    print("\nRound " + round);
     String playerMove = getPlayerMove();
-    
-    if (playerMove == "Quit") {
-      return;
-    }
-    
-    print("You- $playerMove");
     String computerMove = getComputerMove();
+    print("You- $playerMove");
     print("Bot- $computerMove");
-    print(whoWon(playerMove, computerMove));
-    print("");
+     
+      if (playerMove == computerMove) { 
+        print ("Result: Its a tie!");
+      } else if (playerMove == "Bato" && computerMove == "Gunting") {
+          playerscore+=1;
+        print("Result: You Win!:)\n");
+      } else if (playerMove == "Gunting" && computerMove == "Papel") {
+        playerscore+=1;
+        print("Result: You Win!:)");
+      } else if (playerMove == "Papel" && computerMove == "Bato") {
+        playerscore+=1;
+        print("Result: You Win!:)");
+      } else {  
+        compscore+=1;
+        print("Result: You lose.:( Computer Wins!");
+      }
   }
+    
+      print("-----------------------------------");
+      print("You: $playerscore Bot: $compscore");
+      if(playerscore==compscore){
+          print("Overall: Its a tie!");
+      }
+      else if(playerscore>compscore){
+          print("Overall: You win.:)");
+      }
+      else{
+          print("Overall: You lose.:(");
+      }
 }
